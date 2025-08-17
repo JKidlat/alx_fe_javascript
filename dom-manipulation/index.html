@@ -1,14 +1,84 @@
 <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Quote Generator</title>
-  </head>
-  <body>
-    <h1>Dynamic Quote Generator</h1>
-    <div id="quoteDisplay"></div>
-    <button id="newQuote">Show New Quote</button>
-    <script src="script.js"></script>
-  </body>
-  </html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Quote Generator</title>
+  <!-- Tailwind CSS for styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Inter font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+  <!-- Main container for the application -->
+  <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-2xl text-center">
+    
+    <!-- Quote Display Area -->
+    <div class="mb-8">
+      <div id="quoteText" class="text-3xl font-bold text-gray-800 italic">"Your time is limited, so don't waste it living someone else's life."</div>
+      <div id="quoteAuthor" class="mt-4 text-lg text-gray-600">- Life</div>
+    </div>
+    
+    <!-- Controls Section -->
+    <div class="space-y-6">
+      <!-- Show New Quote Button -->
+      <button id="newQuote" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 shadow-lg">
+        Show New Quote
+      </button>
+
+      <!-- Category Filter -->
+      <div class="flex flex-col items-center">
+        <label for="categoryFilter" class="block text-sm font-medium text-gray-700 mb-2">Filter by Category:</label>
+        <select id="categoryFilter" class="block w-full max-w-xs p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
+          <option value="all">All Categories</option>
+        </select>
+      </div>
+
+      <!-- JSON Import/Export and Web Storage Info -->
+      <div class="bg-gray-200 p-4 rounded-lg shadow-inner">
+        <h2 class="text-lg font-semibold text-gray-700 mb-4">Data Management</h2>
+        <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+          <!-- Export Button -->
+          <button id="exportQuotes" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 shadow-md">
+            Export Quotes
+          </button>
+          <!-- Import File Input -->
+          <div class="w-full flex justify-center items-center">
+            <input type="file" id="importFile" accept=".json" class="hidden" />
+            <label for="importFile" class="w-full text-center bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 shadow-md cursor-pointer">
+              Import from JSON
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sync Status Notification -->
+      <div id="syncStatus" class="mt-4 p-3 rounded-lg text-sm text-center font-medium bg-blue-100 text-blue-800 hidden">
+        Syncing data...
+      </div>
+
+      <!-- Add Quote Section (Dynamically created) -->
+      <div id="addQuoteContainer" class="bg-white p-4 rounded-lg shadow-inner">
+        <h2 class="text-lg font-semibold text-gray-700 mb-4">Add a New Quote</h2>
+        <div class="space-y-4">
+          <input type="text" id="newQuoteText" placeholder="Enter a new quote" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
+          <input type="text" id="newQuoteCategory" placeholder="Enter quote category" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
+          <button id="addQuoteBtn" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 shadow-md">
+            Add Quote
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Link to the external JavaScript file -->
+  <script src="script.js"></script>
+</body>
+</html>
