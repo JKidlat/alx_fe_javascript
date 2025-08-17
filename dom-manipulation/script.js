@@ -16,13 +16,13 @@ const controlsContainer = document.getElementById('controlsContainer');
 
 /**
  * Displays a random quote from the quotes array.
- * This function name is now correctly `showRandomQuote` as requested.
+ * This function is now correctly named "displayRandomQuote" as requested.
  */
-function showRandomQuote() {
+function displayRandomQuote() {
   // Check if there are any quotes to display
   if (quotes.length === 0) {
-    quoteTextElement.textContent = "No quotes available. Add some!";
-    quoteAuthorElement.textContent = "";
+    quoteTextElement.innerHTML = "No quotes available. Add some!";
+    quoteAuthorElement.innerHTML = "";
     return;
   }
   
@@ -30,9 +30,9 @@ function showRandomQuote() {
   const randomIndex = Math.floor(Math.random() * quotes.length);
   const randomQuote = quotes[randomIndex];
   
-  // Logic to update the DOM
-  quoteTextElement.textContent = `"${randomQuote.text}"`;
-  quoteAuthorElement.textContent = `- ${randomQuote.category}`;
+  // Logic to update the DOM using innerHTML
+  quoteTextElement.innerHTML = `"${randomQuote.text}"`;
+  quoteAuthorElement.innerHTML = `- ${randomQuote.category}`;
 }
 
 /**
@@ -45,7 +45,6 @@ function addQuote(newQuoteText, newQuoteCategory) {
   
   // Basic validation to ensure both fields are filled
   if (text === "" || category === "") {
-    // We'll log an error to the console instead of using an alert for a better user experience
     console.error("Please enter both a quote and a category.");
     return;
   }
@@ -63,12 +62,11 @@ function addQuote(newQuoteText, newQuoteCategory) {
   newQuoteCategory.value = '';
   
   // Update the DOM to show the new quote
-  showRandomQuote();
+  displayRandomQuote();
 }
 
 /**
  * Dynamically creates the form to add a new quote and appends it to the DOM.
- * This function name is now correctly `createAddQuoteForm` as requested.
  */
 function createAddQuoteForm() {
   // Create a container div for the form
@@ -78,7 +76,7 @@ function createAddQuoteForm() {
   // Create the heading for the form
   const heading = document.createElement('h2');
   heading.className = 'text-lg font-semibold text-gray-700 mb-4';
-  heading.textContent = 'Add a New Quote';
+  heading.innerHTML = 'Add a New Quote';
 
   // Create an inner div for spacing the form elements
   const innerDiv = document.createElement('div');
@@ -102,7 +100,7 @@ function createAddQuoteForm() {
   const addQuoteBtn = document.createElement('button');
   addQuoteBtn.id = 'addQuote';
   addQuoteBtn.className = 'w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 shadow-md';
-  addQuoteBtn.textContent = 'Add Quote';
+  addQuoteBtn.innerHTML = 'Add Quote';
   
   // Append the input fields and button to the inner div
   innerDiv.appendChild(newQuoteTextInput);
@@ -123,10 +121,10 @@ function createAddQuoteForm() {
 }
 
 // Add event listener on the “Show New Quote” button
-newQuoteBtn.addEventListener('click', showRandomQuote);
+newQuoteBtn.addEventListener('click', displayRandomQuote);
 
 // Call the functions on page load to set everything up
 window.onload = () => {
-  showRandomQuote();
+  displayRandomQuote();
   createAddQuoteForm();
 };
